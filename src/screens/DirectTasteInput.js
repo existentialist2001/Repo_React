@@ -1,22 +1,12 @@
 //*취향종류선택페이지에서 직접 입력 누를 시 렌더링되는 페이지
 import React, { useState } from "react";
 
-import {
-  useHistory,
-  useRouteMatch,
-  Route,
-  Link,
-  Switch,
-} from "react-router-dom";
-
-//취향 직접 입력 후 곧바로 취향에 대한 구체적 내용을 입력받는 페이지로 라우팅하기 위한 임포트
-import InputTasteContent from "./InputTasteContent";
+import { useHistory, Link } from "react-router-dom";
 
 const DirectTasteInput = (props) => {
   const [inputedTaste, setInputedTaste] = useState("");
 
   let history = useHistory();
-  let { url, path } = useRouteMatch();
 
   const onComplete = () => {
     //조건문을 이용해서 아무것도 입력되지 않았을때 경우를 조건적으로 처리
@@ -33,7 +23,6 @@ const DirectTasteInput = (props) => {
         },
       ]);
     }
-
     //todo 공백이 존재하는 경우, 공백을 없애주는 로직작성 -> 이후 공백 제거한 것을 이용하여 라우팅(일단 공백없다는 전제하에 개발)
     //todo 취향에 아무것도 입력되지 않았을 경우를 처리하는 로직은 나중에
   };
@@ -57,18 +46,10 @@ const DirectTasteInput = (props) => {
         value={inputedTaste}
         onChange={onChange}
       />
-      <Link to={`${url}/${inputedTaste}`} onClick={onComplete}>
+      <Link to={`/taste/${inputedTaste}`} onClick={onComplete}>
         완료
       </Link>
       <button onClick={() => goBack()}>Back</button>
-      <Switch>
-        <Route path={`${path}/:taste_name`}>
-          <InputTasteContent
-            tastes={props.tastes}
-            setTastes={props.setTastes}
-          />
-        </Route>
-      </Switch>
     </div>
   );
 };

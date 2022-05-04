@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
+//todo placeholder + 조건문 사용해서 이전에 입력했던, 저장된 내용 적혀있도록,,
+
 const InputTasteContent = (props) => {
   const history = useHistory();
   let match = useRouteMatch();
