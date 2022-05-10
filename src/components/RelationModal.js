@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
+import MainButton from "./MainButton";
+
 const RelationModal = (props) => {
   //사용자가 선택한 관계상태를 저장하기 위한 state
   const [selectedRelation, setSelectedRelation] = useState("");
 
   const completeHandler = () => {
     //todo 나중에 주석해제하고 이 코드로 바꾸어야 함props.onChange(selectedRelation);
-    props.onChange("관계 선택");
+    props.onChange(selectedRelation);
     props.onCancel();
   };
 
@@ -21,9 +23,26 @@ const RelationModal = (props) => {
     <>
       {props.visible ? (
         <div>
-          <div>관계선택 모달</div>
-          <button onClick={completeHandler}>완료</button>
-          <button onClick={delHandler}>취소</button>
+          <div>
+            <button onClick={completeHandler}>완료</button>
+            <button onClick={delHandler}>취소</button>
+          </div>
+          <div>
+            <MainButton onChange={setSelectedRelation}>절친한 사이</MainButton>
+            <MainButton onChange={setSelectedRelation}>친한 사이</MainButton>
+            <MainButton onChange={setSelectedRelation}>친해지는 중</MainButton>
+          </div>
+          <div>
+            <MainButton onChange={setSelectedRelation}>알아가는 중</MainButton>
+            <MainButton onChange={setSelectedRelation}>함께 사는 중</MainButton>
+            <MainButton onChange={setSelectedRelation}>사랑하는 중</MainButton>
+          </div>
+          <div>
+            <MainButton onChange={setSelectedRelation}>아는 사이</MainButton>
+            <MainButton onChange={setSelectedRelation}>가족</MainButton>
+            <MainButton onChange={setSelectedRelation}>소꿉 친구</MainButton>
+            <MainButton onChange={setSelectedRelation}>절친</MainButton>
+          </div>
         </div>
       ) : null}
     </>
