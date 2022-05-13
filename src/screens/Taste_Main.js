@@ -34,12 +34,12 @@ const Taste_Main = (props) => {
   };
 
   return (
-    <div className="screen">
-      <div className="header"></div>
+    <div style={styles.screen}>
+      <div style={styles.header}>헤더</div>
 
-      <div className="main">
+      <div style={styles.main}>
         <div className="mainTextsContainer">
-          <div className="mainFirst">
+          <div style={styles.mainFirst} className="mainFirst">
             <div>주송준</div>
             <div>
               <button onClick={() => setNicknameModal(true)}>{nickname}</button>
@@ -66,27 +66,71 @@ const Taste_Main = (props) => {
         </div>
       </div>
 
-      <div className="middletab">
+      <div style={styles.middleBar}>
         <Link to="/basicinfo">기본정보</Link>
         <Link to="/taste">취향</Link>
         <Link to="/history">히스토리</Link>
       </div>
 
-      <div className="information"></div>
-      <Route path="/basicinfo">
-        <Taste_basicinfo_screen />
-      </Route>
-      <Route path="/taste">
-        <Taste_taste_screen
-          tastes={props.tastes}
-          setTastes={props.setTastes}
-        ></Taste_taste_screen>
-      </Route>
-      <Route path="/history">
-        <Taste_history_screen />
-      </Route>
+      <div style={styles.information}>
+        <Route path="/basicinfo">
+          <Taste_basicinfo_screen />
+        </Route>
+        <Route path="/taste">
+          <Taste_taste_screen
+            tastes={props.tastes}
+            setTastes={props.setTastes}
+          ></Taste_taste_screen>
+        </Route>
+        <Route path="/history">
+          <Taste_history_screen />
+        </Route>
+      </div>
     </div>
   );
 };
 
 export default Taste_Main;
+
+const styles = {
+  screen: {
+    //flex 컨테이너로 만들어주고, main axis를 세로 축으로
+    display: "flex",
+    flexDirection: "column",
+    //screen이 전체 flex 컨테이너이기 때문에, viewport를 기준으로 100% 설정
+    width: "100vw",
+    height: "100vh",
+  },
+  header: {
+    //헤더는 전체의 10%만큼 차지
+    height: "10%",
+    backgroundColor: "blue",
+  },
+
+  main: {
+    //main은 전체의 20%만큼 차치
+    height: "20%",
+    backgroundColor: "yellow",
+  },
+
+  middleBar: {
+    //middleBar는 전체의 10%만큼 차지
+    height: "10%",
+    backgroundColor: "orange",
+
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+
+  information: {
+    //information은 전체의 60%만큼 차지
+    height: "60%",
+    backgroundColor: "green",
+  },
+
+  mainFirst: {
+    //이름과 호칭을 가로로 배열하기 위해
+    display: "flex",
+  },
+};
