@@ -8,9 +8,9 @@ import DirectTasteInput from "./screens/DirectTasteInput";
 import InputTasteContent from "./screens/InputTasteContent";
 
 function App() {
-  //! 취향 종류들을 관리하는 useState(이건 전역적으로 관리해주어야 함, 나중에 꼭 contenxt api로 전역적으로 바꾸기)
+  //! 취향 종류들을 관리하는 useState(이건 전역적으로 관리해주어야 함, 나중에 꼭 contenxt api로 전역적으로 바꾸어야 하나??)
   //todo date: getDate()로 바꾸어 주어야함, 리액트 네이티브 코드 다시 보면서,,
-  //todo setTastes함수가 총 4단계에 걸쳐서 취향직접입력 하위 컴포넌트로 전달된다, 근데 이거 전역으로 관리해야 하는 것이므로 나중에 context api로 바꾸기(지금은 일일히 하위 prop으로 전달하는 중이다)
+  //todo setTastes함수가 총 4단계에 걸쳐서 취향직접입력 하위 컴포넌트로 전달된다.
   //object인 array. 이미지 주소 require 안쓰고 넣어줘야 에러 안뜸.
   const [tastes, setTastes] = useState([
     { name: "음식", key: "1", content: null, date: "", image: "" },
