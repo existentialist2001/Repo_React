@@ -81,17 +81,23 @@ const Taste_Main = (props) => {
         </MainContainer>
 
         <MiddleBarContainer>
-          <MiddleBarLinkContainer>
-            <Link className="MiddleBarLinkTexts" to="/basicinfo">
+          <MiddleBarLinksContainer>
+            <MiddleBarLinkTextContainer>
+            <Link to="/basicinfo">
               기본정보
             </Link>
-            <Link className="MiddleBarLinkTexts" to="/taste">
+            </MiddleBarLinkTextContainer>
+            <MiddleBarLinkTextContainer>
+            <Link to="/taste">
               취향
             </Link>
-            <Link className="MiddleBarLinkTexts" to="/history">
+            </MiddleBarLinkTextContainer>
+            <MiddleBarLinkTextContainer>
+            <Link to="/history">
               히스토리
             </Link>
-          </MiddleBarLinkContainer>
+            </MiddleBarLinkTextContainer>
+          </MiddleBarLinksContainer>
         </MiddleBarContainer>
       </GradientContainer>
 
@@ -138,6 +144,15 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
+const BackButton = styled.button`
+  background-color: transparent;
+  border-color: transparent;
+`;
+
+const ThreeDotButton = styled.button`
+  background-color: transparent;
+  border-color: transparent;
+`;
 const MainContainer = styled.div`
   //main은 전체의 20%만큼, 그라데이션의 50%만큼 차치
   height: 50%;
@@ -176,45 +191,11 @@ const MainNamesContainer = styled.div`
   width: 100%;
   padding-left:6%;
 `;
-const MainRelationContainer =styled.div`
-width:100%;
-height:50%;
-display:flex;
-justify-content: center;
-
-`
-
-const MiddleBarContainer = styled.div`
-  //middleBar는 전체의 10%만큼,  그라데이션의 25%차지
-  height: 25%;
-  width: 100%;
-
-  //
-  background-color: white;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-
-  //
-  display: flex;
-  justify-content: center;
-`;
-
-const BackButton = styled.button`
-  background-color: transparent;
-  border-color: transparent;
-`;
-
-const ThreeDotButton = styled.button`
-  background-color: transparent;
-  border-color: transparent;
-`;
-
 const NameText = styled.div`
   color: white;
   font-weight: bold;
   font-size: 27px;
 `;
-
 const NickNameButton = styled.button`
   //todo 아래 속성값들 반응형으로 바꾸어야 함.
   border-radius: 98px;
@@ -231,6 +212,14 @@ const NickNameButton = styled.button`
   //버튼 색을 투명하게 해서 뒷 배경색으로 보이게.
   background-color: transparent;
 `;
+
+const MainRelationContainer =styled.div`
+width:100%;
+height:50%;
+display:flex;
+justify-content: center;
+
+`
 
 const RelationButton = styled.button`
   
@@ -253,10 +242,65 @@ const RelationButton = styled.button`
 
 
 `;
+const MiddleBarContainer = styled.div`
+  //middleBar는 전체의 10%만큼,  그라데이션의 25%차지
+  height: 25%;
+  width: 100%;
 
+  //
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  //! 공식문서로 공부하기
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.06);
+
+  //
+  display: flex;
+  justify-content: center;
+`;
+
+
+const MiddleBarLinksContainer = styled.div`
+  //middleBar(뷰포트 가로 전체)의 80%
+  width: 80%;
+  //middleBar의 높이 100%(높이도 설정해주지 않으면, content 크기만큼만 가져감, div가 기본값이 block이기 때문)
+  height: 100%;
+  display: flex;
+
+`;
+
+
+const MiddleBarLinkTextContainer =styled.div`
+  display:flex;
+  box-sizing:border-box;
+  width:33%;
+  height:100%;
+
+  padding-top:4%;
+  justify-content: center;
+  align-items: center;
+  
+  
+  //! hover 가상선택자는 포인터를 갖다 대면 스타일링이 적용되는건데, 여기서는 클릭하면 적용되어서 바로 사용했다. 도대체 왜 되는거지??
+  //! 원래는 prop, useState, onClick 이용해서 조건적으로 스타일링 구현하려고 했었는데...
+  :hover {
+    border-bottom:solid 2px #627cec
+  }
+
+  //text styling
+  /* 
+  Link tag는 결국 a태그로 변환되므로, css 태그 선택자를 Link로 하지말고 a로 하여야 함.
+  */
+  a {
+  text-decoration: none;
+    color: #627cec;
+    font-weight: bold;
+    font-size: 1.4em;
+  }
+`
 
 const InformationContainer = styled.div`
-  //information은 전체의 60%만큼 차지
+  //information은 전체(뷰표트)의 60%만큼 차지
   height: 60%;
   width: 100%;
 
@@ -265,34 +309,7 @@ const InformationContainer = styled.div`
   border-top-color: black;
 `;
 
-const MiddleBarLinkContainer = styled.div`
-  //middleBar(뷰포트 가로 전체)의 80%
-  width: 80%;
-  //middleBar의 높이 100%(높이도 설정해주지 않으면, content 크기만큼만 가져감)
-  height: 100%;
-  //
-  display: flex;
-  //justify-content: space-between;
-  align-items: center;
 
-  .MiddleBarLinkTexts {
-    text-decoration: none;
-    color: #627cec;
-    font-weight: bold;
-    font-size: 1.4em;
-
-    //! 복기필요 
-    box-sizing:border-box;
-    width:33%;
-    //height:100%;
-    text-align: center;
-  }
-  .MiddleBarLinkTexts:active{
-    box-sizing:border-box;
-    border-bottom:1px solid black;
-  }
-
-`;
 const styles = {
   planetContainer: {
     width: "65%",

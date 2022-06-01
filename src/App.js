@@ -12,13 +12,14 @@ function App() {
   //todo date: getDate()로 바꾸어 주어야함, 리액트 네이티브 코드 다시 보면서,,
   //todo setTastes함수가 총 4단계에 걸쳐서 취향직접입력 하위 컴포넌트로 전달된다.
   //object인 array. 이미지 주소 require 안쓰고 넣어줘야 에러 안뜸.
+  
   const [tastes, setTastes] = useState([
-    { name: "음식", key: "1", content: null, date: "", image: "" },
-    { name: "취미", key: "2", content: null, date: "", image: "" },
-    { name: "음악", key: "3", content: null, date: "", image: "" },
-    { name: "문화생활", key: "4", content: null, date: "", image: "" },
-    { name: "장소", key: "5", content: null, date: "", image: "" },
-    { name: "선물", key: "6", content: null, date: "", image: "" },
+    { name: "음식", key: "1", content: null, date: "", image: "", },
+    { name: "취미", key: "2", content: null, date: "", image: "", },
+    { name: "음악", key: "3", content: null, date: "", image: "", },
+    { name: "문화생활", key: "4", content: null, date: "", image: "", },
+    { name: "장소", key: "5", content: null, date: "", image: "", },
+    { name: "선물", key: "6", content: null, date: "", image: "", },
   ]);
 
   return (
