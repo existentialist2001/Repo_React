@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-
 const Taste_taste_screen = (props) => {
   //image를 렌더링하기 위한 로직
   /*
@@ -24,7 +23,7 @@ const Taste_taste_screen = (props) => {
   ];
   //받아온 호칭 배열에 이미지 주소 넣기
 
-  //! 이거 밖에 i 언언안해주면 i찾을 수 없다고 에러남, 왜지??
+  //! 이거 밖에 i 선언안해주면 i찾을 수 없다고 에러남, 왜지??
   let i=0;
   for(i=0;i<props.tastes.length;i++){
     if (i<6){
@@ -35,21 +34,16 @@ const Taste_taste_screen = (props) => {
     }
   }
 
-
-
-
   //props로 받아온 딕셔너리 배열로 리스트 엘리먼트 생성.
   const list_of_tastes = props.tastes.map((taste) => (
-        <ListItemsContainer><li key={taste.key}><ListImageContainer><img src={taste.image}/></ListImageContainer><ListTextsContainer>{taste.name}</ListTextsContainer></li></ListItemsContainer>
+        <ListItemsContainer><li key={taste.key}><ListImageContainer><img src={taste.image}/></ListImageContainer><ListTextsContainer><span>{taste.name}</span><span>{taste.content}</span></ListTextsContainer></li></ListItemsContainer>
     
   ));
-  
-
   
   return (
       <ScreenContainer>
       <ul>{list_of_tastes}</ul>
-      <Link to="/taste/choose_taste_to_edit">연필버튼</Link>
+      <Link to="/taste/choose_taste_to_edit"><img src={require("../images/edit.png")}/></Link>
       </ScreenContainer>
   );
 };
@@ -58,10 +52,11 @@ export default Taste_taste_screen;
 
 
 const ScreenContainer=styled.div`
+
+
+
 width:100%;
 height:100%;
-
-
 //ul list에서 점 없애줌.
 //ul의 기본 마진과 패딩이 존재해서, 없애줌.
 ul { list-style: none; padding-left: 0px; margin:0px; 
@@ -69,8 +64,15 @@ ul { list-style: none; padding-left: 0px; margin:0px;
   width:100%; height:100% };
 
 
+a {
+  //연필버튼 고정
+  position:fixed;
+  //todo 반응형으로
+  right:10px;
+  bottom:10px;
+ 
+}
 `
-
 const ListItemsContainer=styled.div`
 width:100%;
 height:20%;
@@ -83,13 +85,9 @@ border이 아닌 border-bottom에만 속성을 적용하고,
 #627cec를 rgb값으로 바꾸고,
 opacity를 rgba값으로 함께 주어서
 border-bottom의 색과 투명도를 함께 적용하였다.
-
 */
 border-bottom: solid 0.5px rgba(98,124,236,0.3);
-
-
 li {
-
 /*ListImageContainer, ListTextsContainer의 부모 요소이므로, 크기 설정과 flex box로 지정 */
 display:flex;
 width:100%;
@@ -99,7 +97,6 @@ height:100%;
 const ListImageContainer=styled.div`
 width:35%;
 height:100%;
-
 
 display:flex;
 justify-content: center;
@@ -114,6 +111,23 @@ img {
 const ListTextsContainer=styled.div`
 width:65%;
 height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
 
+span:nth-child(1) {
+  font-size:15px;
+  font-weight: bold;
+  color: #292929;
+  font-family: Roboto;
+}
+
+span:nth-child(2) {
+  font-size:15px;
+  font-weight: normal;
+  color: #939393;
+  font-family: Roboto;
+
+}
 `
 

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import { useHistory, Link } from "react-router-dom";
 
+import styled from "styled-components";
+
 const DirectTasteInput = (props) => {
   const [inputedTaste, setInputedTaste] = useState("");
 
@@ -39,19 +41,114 @@ const DirectTasteInput = (props) => {
   };
 
   return (
-    <div>
+    <ScreenContainer>
+       <HeaderContainer><HeaderContentBox><button onClick={() => goBack()}><img src={require("../images/back_black.png")}/></button>직접 입력</HeaderContentBox></HeaderContainer>
+       <MainContainer>
       <input
         type="text"
-        placeholder="취향"
+        placeholder="(예)독서"
         value={inputedTaste}
         onChange={onChange}
       />
+      </MainContainer>
+      <FooterContainer>
       <Link to={`/taste/${inputedTaste}`} onClick={onComplete}>
-        완료
+        <img src={require("../images/next_step.png")}/>
       </Link>
-      <button onClick={() => goBack()}>Back</button>
-    </div>
+      </FooterContainer>
+     
+      
+    </ScreenContainer>
   );
 };
+
+const ScreenContainer =styled.div`
+width:100vw;
+height:100vh;
+
+
+//이런 방식으로 전체 기본설정이 가능
+* {
+  box-sizing:border-box;
+  margin:0px;
+  padding:0px;
+}
+`
+
+const HeaderContainer =styled.div`
+width:100%;
+height:10%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+`
+const HeaderContentBox = styled.div`
+height: 100%;
+width: 80%;
+
+display:flex;
+align-items:center;
+
+//text styling
+font-family: Roboto;
+font-size: 18px;
+font-weight: bold;
+color: #707070;
+
+button {
+//button tag의 기본값 설정
+border:none;
+background-color:transparent;
+
+img {
+  //todo 반응형으로 바꾸어야 함
+  width:30px;
+  height:30px;
+  padding-right:5px;
+}
+
+}
+
+`
+const MainContainer =styled.div`
+width:100%;
+height:70%;
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+input {
+  padding-left:4%;
+  border: solid 2px #c9c9c9;
+  width: 80%;
+  height: 10%
+}
+//placeholder 선택자.
+input::placeholder{
+  font-weight: bold;
+  text-align: left;
+  color: #c9c9c9;
+  font-family: Roboto;
+  font-size: 20px;
+}
+
+input:focus {
+    outline: none ;
+    border-color: #627cec;
+}
+`
+
+const FooterContainer =styled.div`
+width:100%;
+height:20%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+`
+
 
 export default DirectTasteInput;

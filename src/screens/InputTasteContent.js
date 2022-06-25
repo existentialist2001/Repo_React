@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
+import styled from "styled-components";
+
 //todo placeholder + 조건문 사용해서 이전에 입력했던, 저장된 내용 적혀있도록,,
 
 const InputTasteContent = (props) => {
@@ -38,17 +40,43 @@ const InputTasteContent = (props) => {
     history.push("/taste");
   };
   return (
-    <div>
+    <ScreenContainer>
+      <HeaderContainer>
       {props.tastes[foundIndex].name}에 대한 구체적 내용 입력
       <input type="text" value={inputedContent} onChange={onChange} />
       <button onClick={onComplete}>save</button>
-    </div>
+      </HeaderContainer>
+    <MainContainer></MainContainer>
+      </ScreenContainer>
   );
 };
-
 /* 
 prop이나
 useRouteMatch로 취향의 이름에 접근, 이를 이용하여
 기존의 취향
 */
+
+const ScreenContainer =styled.div`
+width:100vw;
+height:100vh;
+
+
+//전체 기본설정
+* {
+  box-sizing:border-box;
+  margin:0px;
+  padding:0px;
+}
+`
+
+const HeaderContainer=styled.div`
+width:100%;
+height:30%;
+`
+
+
+const MainContainer=styled.div`
+width:100%;
+height:70%;
+`
 export default InputTasteContent;
