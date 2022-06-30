@@ -39,14 +39,16 @@ const InputTasteContent = (props) => {
     // /taste 주소로 이동시켜주기
     history.push("/taste");
   };
+
+  const goBack = () => {
+   history.goBack();
+  };
   return (
     <ScreenContainer>
       <HeaderContainer>
-      {props.tastes[foundIndex].name}에 대한 구체적 내용 입력
-      <input type="text" value={inputedContent} onChange={onChange} />
-      <button onClick={onComplete}>save</button>
+      <HeaderContentBox><span><button onClick={() => goBack()}><img src={require("../images/back_black.png")}/></button> {props.tastes[foundIndex].name}</span><SaveBtnBox><button onClick={onComplete}>저장</button></SaveBtnBox></HeaderContentBox>
       </HeaderContainer>
-    <MainContainer></MainContainer>
+    <MainContainer><MainBox_1>이소망님의<br/>{props.tastes[foundIndex].name} 취향은 어떤가요?</MainBox_1><MainBox_2><input type="text" value={inputedContent} onChange={onChange} placeholder="내용을 입력해주세요" /></MainBox_2><MainBox_3></MainBox_3></MainContainer>
       </ScreenContainer>
   );
 };
@@ -67,16 +69,102 @@ height:100vh;
   margin:0px;
   padding:0px;
 }
+//buton tag의 기본값 설정 
+button {
+border:none;
+background-color:transparent;
+}
+
 `
+
 
 const HeaderContainer=styled.div`
 width:100%;
-height:30%;
-`
+height:10%;
 
+display:flex;
+justify-content: center;
+`
+const HeaderContentBox = styled.div`
+height: 100%;
+width: 80%;
+
+display:flex;
+align-items:center;
+justify-content: space-between;
+
+//text styling
+font-family: Roboto;
+font-size: 18px;
+font-weight: bold;
+color: #707070;
+
+button {
+img {
+  //todo 반응형으로 바꾸어야 함
+  width:30px;
+  height:30px;
+  padding-right:5px;
+}
+}
+
+span {
+  display:flex;
+  align-items: center;
+}
+
+`
+const SaveBtnBox =styled.div`
+button{
+  //text styling
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: bold;
+  color: #627cec;
+}
+`
 
 const MainContainer=styled.div`
 width:100%;
-height:70%;
+height:90%;
 `
+
+const MainBox_1=styled.div`
+width:100%;
+height:20%;
+
+display:flex;
+align-items: center;
+padding-left:10%;
+
+border-bottom:solid 0.5px #627cec;
+
+//text styling
+font-family: Montserrat;
+font-size: 24px;
+font-weight: bold;
+color: #292929;
+`
+
+const MainBox_2=styled.div`
+width:100%;
+height:40%;
+padding-left:10%;
+padding-top:10%;
+input {
+  border:none;
+}
+
+input::placeholder{
+  font-family: Roboto;
+  font-size: 15px;
+  color: #939393;
+}
+`
+
+const MainBox_3=styled.div`
+width:100%;
+height:40%;
+`
+
 export default InputTasteContent;

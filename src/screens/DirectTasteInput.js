@@ -49,6 +49,7 @@ const DirectTasteInput = (props) => {
         placeholder="(예)독서"
         value={inputedTaste}
         onChange={onChange}
+        
       />
       </MainContainer>
       <FooterContainer>
@@ -56,8 +57,6 @@ const DirectTasteInput = (props) => {
         <img src={require("../images/next_step.png")}/>
       </Link>
       </FooterContainer>
-     
-      
     </ScreenContainer>
   );
 };
