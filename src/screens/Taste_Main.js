@@ -7,6 +7,8 @@ import styled from "styled-components";
 //모달 임포트
 import MainButton from "../components/NicknameModal";
 import RelationModal from "../components/RelationModal";
+import ThreeDotModal from "../components/ThreeDotModal";
+import DeleteModal from "../components/DeleteModal";
 
 //중첩 라우팅을 위한 스크린 임포트
 import Taste_basicinfo_screen from "./Taste_basicinfo_screen";
@@ -39,6 +41,12 @@ const Taste_Main = (props) => {
     setNicknameModal(false);
   };
 
+  //점 버튼
+  const [threeDotModal, setThreeDotModal]=useState(false);
+
+  //삭제 버튼 
+  const [deleteModal, setDeleteModal] =useState(false);
+
   return (
     <ScreenContainer>
       <GradientContainer>
@@ -47,9 +55,11 @@ const Taste_Main = (props) => {
             <MdArrowBackIosNew color="white" size="35" />
           </BackButton>
 
-          <ThreeDotButton>
+          <ThreeDotButton onClick={()=>setThreeDotModal(true)}>
             <HiDotsHorizontal color="white" size="35" />
           </ThreeDotButton>
+          <ThreeDotModal open={threeDotModal} onCancel={setThreeDotModal} onDelete={setDeleteModal}/>
+          <DeleteModal open={deleteModal} onCancel={setDeleteModal} />
         </HeaderContainer>
 
         <MainContainer>
@@ -78,6 +88,7 @@ const Taste_Main = (props) => {
               />
             </MainRelationContainer>
           </MainSectionContainer>
+       
         </MainContainer>
 
         <MiddleBarContainer>
@@ -128,6 +139,16 @@ const ScreenContainer = styled.div`
   //screen이 전체 flex 컨테이너이기 때문에, viewport를 기준으로 100% 설정
   width: 100vw;
   height: 100vh;
+
+  .planetImg {
+    position:absolute;
+    left:10%;
+    top:-30%;
+    z-index: 0;
+
+    width:512px;
+    height:893px;
+  }
 `;
 
 const GradientContainer = styled.div`
@@ -161,6 +182,9 @@ const MainContainer = styled.div`
   //main을 flexbox로 만들어 주어야, main안의 요소들이(이름 호칭 관계 묶음, 행성 이미지) 가로로 배열됨
   display: flex;
   justify-content: space-between;
+
+
+
 `;
 
 //mainTextsContainer와 planetContainer은 부모인 main의 width를 35%, 65%씩, 100% height
@@ -173,6 +197,10 @@ const MainSectionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+
+  //전체 z index 맥락 꼼꼼하고 철저하게 재 설정해야함..
+  /* position:relative;
+  z-index: 1; */
 `;
 
 const MainNamesContainer = styled.div`
@@ -241,7 +269,13 @@ const RelationButton = styled.button`
   
 
 
-`;
+`
+
+
+
+
+
+
 const MiddleBarContainer = styled.div`
   //middleBar는 전체의 10%만큼,  그라데이션의 25%차지
   height: 25%;
@@ -257,7 +291,11 @@ const MiddleBarContainer = styled.div`
   //
   display: flex;
   justify-content: center;
-`;
+
+  //
+  /* position:relative;
+  z-index: 1; */
+`
 
 
 const MiddleBarLinksContainer = styled.div`
@@ -304,23 +342,9 @@ const InformationContainer = styled.div`
   height: 60%;
   width: 100%;
 
-  //! 왜 안먹히니..
+  //! 왜 안먹히니.. -> border style 까지 정의해줘야지!!
   border-top-width: 10px;
   border-top-color: black;
 `;
 
 
-const styles = {
-  planetContainer: {
-    width: "65%",
-    height: "100%",
-  },
-  planetImg: {
-    //todo svg파일로 바꾼 후(안그러면 깨진다) width, height, layout해서 적용하면 된다.
-    width: "80%",
-    height: "130%",
-  },
-  //<div style={styles.planetContainer}><img style={styles.planetImg} src={require("../images/planet.png")}/></div>
-
-  //todo Link 태그의 text에 인라인 방식으로 적용한 스타일들 styled component로 변경해야함.
-};

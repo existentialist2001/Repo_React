@@ -43,6 +43,7 @@ const Taste_taste_screen = (props) => {
   return (
       <ScreenContainer>
       <ul>{list_of_tastes}</ul>
+      
       <Link to="/taste/choose_taste_to_edit"><img src={require("../images/edit.png")}/></Link>
       </ScreenContainer>
   );
@@ -67,6 +68,7 @@ ul { list-style: none; padding-left: 0px; margin:0px;
 a {
   //연필버튼 고정
   position:fixed;
+  
   //todo 반응형으로
   right:10px;
   bottom:10px;

@@ -125,6 +125,8 @@ padding-right: 10%;
 ul {
   display:flex;
   flex-wrap: wrap;
+  //not working..
+  overflow-y:auto;
 }
 
 `
@@ -136,6 +138,7 @@ height:160px;
 li {
   width:100%;
   height:100%;
+  flex-grow:1;
   /*
   position absolute를 위해 a 태그에 position relative를 설정했지만,
   a태그는 height 100%가 적용되지 않음
