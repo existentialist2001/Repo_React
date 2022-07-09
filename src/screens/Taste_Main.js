@@ -88,10 +88,11 @@ const Taste_Main = (props) => {
               />
             </MainRelationContainer>
           </MainSectionContainer>
-       
-        </MainContainer>
+          <PlanetContainer>
+          <img src={require("../images/planet.png")} />
+          </PlanetContainer>
 
-        <MiddleBarContainer>
+          <MiddleBarContainer>
           <MiddleBarLinksContainer>
             <MiddleBarLinkTextContainer>
             <Link to="/basicinfo">
@@ -110,6 +111,9 @@ const Taste_Main = (props) => {
             </MiddleBarLinkTextContainer>
           </MiddleBarLinksContainer>
         </MiddleBarContainer>
+        </MainContainer>
+
+        
       </GradientContainer>
 
       <InformationContainer>
@@ -141,7 +145,7 @@ const ScreenContainer = styled.div`
   height: 100vh;
 
   .planetImg {
-    position:absolute;
+    position:relative;
     left:10%;
     top:-30%;
     z-index: 0;
@@ -176,21 +180,25 @@ const ThreeDotButton = styled.button`
 `;
 const MainContainer = styled.div`
   //main은 전체의 20%만큼, 그라데이션의 50%만큼 차치
-  height: 50%;
+  height: 75%;
   width: 100%;
 
   //main을 flexbox로 만들어 주어야, main안의 요소들이(이름 호칭 관계 묶음, 행성 이미지) 가로로 배열됨
   display: flex;
-  justify-content: space-between;
+  
 
+  //이미지 렌더링 위해서..
+  overflow:hidden;
 
+  //
+  flex-wrap:wrap;
 
 `;
 
 //mainTextsContainer와 planetContainer은 부모인 main의 width를 35%, 65%씩, 100% height
 const MainSectionContainer = styled.div`
   width: 50%;
-  height: 100%;
+  height: 75%;
 
   //
   display: flex;
@@ -270,7 +278,13 @@ const RelationButton = styled.button`
 
 
 `
+const PlanetContainer = styled.div`
+width:50%;
+height:75%;
 
+
+
+`
 
 
 
