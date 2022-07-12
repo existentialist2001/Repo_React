@@ -1,3 +1,6 @@
+//*주송준 메인 페이지
+//! 반응형 완료
+
 import React, { useState } from "react";
 import { Route, Link } from "react-router-dom";
 import NicknameModal from "../components/NicknameModal";
@@ -19,11 +22,12 @@ import Taste_taste_screen from "./Taste_taste_screen";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { HiDotsHorizontal } from "react-icons/hi";
 
-//todo 이 화면에서 취향 클릭했을 때 구체적 내용 입력 페이지로 들어가도록 라우팅하기.
+//todo (MVP에서는X) 이 화면에서 취향 클릭했을 때 구체적 내용 입력 페이지로 들어가도록 라우팅하기.
+
 
 const Taste_Main = (props) => {
-  //! 호칭과 관계상태는 메인 화면에서만 사용하기 때문에 최상단에 state가 위치할 필요 없음.
-  //! 관계상태와 관계상태 모달
+  //호칭과 관계상태는 메인 화면에서만 사용하기 때문에 최상단에 state가 위치할 필요 없음.
+  //관계상태와 관계상태 모달
   const [relationModal, setRelationModal] = useState(false);
   const [relationStatus, setRelationStatus] = useState("관계 선택");
 
@@ -32,7 +36,7 @@ const Taste_Main = (props) => {
     setRelationModal(false);
   };
 
-  //! 호칭과 호칭모달
+  //호칭과 호칭모달
   const [nicknameModal, setNicknameModal] = useState(false);
   const [nickname, setNickname] = useState("호칭");
 
@@ -52,11 +56,11 @@ const Taste_Main = (props) => {
       <GradientContainer>
         <HeaderContainer>
           <BackButton onClick={() => console.log("clicked")}>
-            <MdArrowBackIosNew color="white" size="35" />
+            <MdArrowBackIosNew color="white" class="backBtnStyle" />
           </BackButton>
 
           <ThreeDotButton onClick={()=>setThreeDotModal(true)}>
-            <HiDotsHorizontal color="white" size="35" />
+            <HiDotsHorizontal color="white" class="threedotBtnStyle" />
           </ThreeDotButton>
           <ThreeDotModal open={threeDotModal} onCancel={setThreeDotModal} onDelete={setDeleteModal}/>
           <DeleteModal open={deleteModal} onCancel={setDeleteModal} />
@@ -66,7 +70,7 @@ const Taste_Main = (props) => {
           <MainSectionContainer>
             <MainNamesContainer>
               <NameText>이지은</NameText>
-              <div>
+              <div class="nicknameBtnContainer">
                 <NickNameButton onClick={()=>setNicknameModal(true)}>{nickname}</NickNameButton>
               </div>
 
@@ -144,15 +148,14 @@ const ScreenContainer = styled.div`
   width: 100vw;
   height: 100vh;
 
-  .planetImg {
-    position:relative;
-    left:10%;
-    top:-30%;
-    z-index: 0;
-
-    width:512px;
-    height:893px;
-  }
+/* 
+이 페이지는 이거 기본값 설정안하고 개발해서 뒤늦게 이 값들 주면 이상해짐
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+} 
+*/
 `;
 
 const GradientContainer = styled.div`
@@ -172,11 +175,34 @@ const HeaderContainer = styled.div`
 const BackButton = styled.button`
   background-color: transparent;
   border-color: transparent;
+
+  width:13%;
+  height:100%;
+
+  border:0px;
+  padding:0px;
+
+  .backBtnStyle {
+    width:68%;
+    height:42%;
+  }
 `;
 
 const ThreeDotButton = styled.button`
   background-color: transparent;
   border-color: transparent;
+
+  width:13%;
+  height:100%;
+
+  border:0px;
+  padding:0px;
+
+
+  .threedotBtnStyle {
+    width:68%;
+    height:42%;
+  }
 `;
 const MainContainer = styled.div`
   //main은 전체의 20%만큼, 그라데이션의 50%만큼 차치
@@ -226,6 +252,12 @@ const MainNamesContainer = styled.div`
   box-sizing:border-box;
   width: 100%;
   padding-left:6%;
+
+  .nicknameBtnContainer {
+    width:33%;
+    height: 35%;
+
+  }
 `;
 const NameText = styled.div`
   color: white;
@@ -233,13 +265,15 @@ const NameText = styled.div`
   font-size: 27px;
 `;
 const NickNameButton = styled.button`
-  //todo 아래 속성값들 반응형으로 바꾸어야 함.
-  border-radius: 98px;
-  width: 53px;
-  height: 33px;
-  font-size: 14px;
+  border-radius: 5.563rem;
+  width: 100%;
+  height: 100%;
+
+  //text
+  font-size: 0.75rem;
   color: white;
   font-weight: bold;
+  text-align: center;
 
   //borderColor 속성만 주면, 뒷 배경색과 색이 합쳐져서 렌더링 된다.
   border: solid 1px;
@@ -247,6 +281,9 @@ const NickNameButton = styled.button`
 
   //버튼 색을 투명하게 해서 뒷 배경색으로 보이게.
   background-color: transparent;
+
+  white-space: nowrap;
+
 `;
 
 const MainRelationContainer =styled.div`
@@ -266,11 +303,10 @@ const RelationButton = styled.button`
   font-weight:bold;
   font-family: Roboto;
   
-  //TODO 반응형으로
-  font-size:14px;
-  width: 117px;
-  height: 42px;
-  border-radius: 20px;
+  font-size:0.875rem;
+  width: 60%;
+  height: 44.2%;
+  border-radius: 1.25rem;
   
   //button이 기본값으로 border가 있기 때문에 없애준다,,
   border-width:0;
@@ -282,13 +318,7 @@ const PlanetContainer = styled.div`
 width:50%;
 height:75%;
 
-
-
 `
-
-
-
-
 
 const MiddleBarContainer = styled.div`
   //middleBar는 전체의 10%만큼,  그라데이션의 25%차지
@@ -297,9 +327,10 @@ const MiddleBarContainer = styled.div`
 
   //
   background-color: white;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  //! 공식문서로 공부하기
+  border-top-right-radius: 1.25rem;
+  border-top-left-radius: 1.25rem;
+  
+  //! 공식문서
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.06);
 
   //
@@ -311,7 +342,6 @@ const MiddleBarContainer = styled.div`
   z-index: 1; */
 `
 
-
 const MiddleBarLinksContainer = styled.div`
   //middleBar(뷰포트 가로 전체)의 80%
   width: 80%;
@@ -320,7 +350,6 @@ const MiddleBarLinksContainer = styled.div`
   display: flex;
 
 `;
-
 
 const MiddleBarLinkTextContainer =styled.div`
   display:flex;
@@ -331,7 +360,6 @@ const MiddleBarLinkTextContainer =styled.div`
   padding-top:4%;
   justify-content: center;
   align-items: center;
-  
   
   //! hover 가상선택자는 포인터를 갖다 대면 스타일링이 적용되는건데, 여기서는 클릭하면 적용되어서 바로 사용했다. 도대체 왜 되는거지??
   //! 원래는 prop, useState, onClick 이용해서 조건적으로 스타일링 구현하려고 했었는데...
@@ -355,10 +383,6 @@ const InformationContainer = styled.div`
   //information은 전체(뷰표트)의 60%만큼 차지
   height: 60%;
   width: 100%;
-
-  //! 왜 안먹히니.. -> border style 까지 정의해줘야지!!
-  border-top-width: 10px;
-  border-top-color: black;
 `;
 
 

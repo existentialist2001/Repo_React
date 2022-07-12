@@ -1,3 +1,7 @@
+//* 관계 선택 버튼 누르면 열리는 모달
+//! 반응형 완료
+
+
 import React, { useState } from "react";
 
 import MainButton from "./MainButton";
@@ -31,27 +35,30 @@ const NicknameModal = (props) => {
   }
 
   const [nicknames, setNicknames]=useState(['절친한 사이','친한 사이','친해지는 중','알아가는 중','함께 사는 중','사랑하는 중','아는 사이','가족','소꿉 친구','절친','연락 단절'])
+
+  const [isBtnSelected, setIsBtnSelected]=useState(false);
+
   
   const nameInputHandler = (e)=> {
     if (e.key ==='Enter'){
       setNicknames(n=>[...n,e.target.value]);
     }
   }
-  //가변 styling
-  const [styleChange, setStyleChange]=useState(true);
-
-  const styleChangeHandler =() => {
-    setStyleChange(s => !s); 
-    console.log("changed");
-    console.log(styleChange);
+  const styleChangeHandler =(idx) => {
+    //이렇게 구성하면 항상 한 요소만 true일 수 밖에 없다
+    const newArr = Array(nicknames.length).fill(false);
+    console.log("newArr",newArr);
+    newArr[idx] = true;
+    setIsBtnSelected(newArr);
+    console.log("changed",isBtnSelected);
   }
 
   const nicknamesList = nicknames.map((nickname, index) => 
    {
     return (
-        <NicknameBtnList key={index} styleChange={styleChange} onClick={styleChangeHandler}>
+        <li class={isBtnSelected[index] ? "clickedStyle" : "basicStyle" } key={index} onClick={()=>(styleChangeHandler(index))}>
         <button onClick={nicknameHandler}>{nickname}</button>
-      </NicknameBtnList>
+      </li>
       
     )
     }
@@ -68,7 +75,7 @@ const NicknameModal = (props) => {
           <ContentContainer>
           <Header>
           <button onClick={delHandler}>취소</button>
-            <span>호칭</span>
+            <span>관계선택</span>
             <button onClick={completeHandler}>완료</button>
           </Header>
           <SectionBox>
@@ -146,8 +153,8 @@ background-color: white;
 //border
 border:3px solid white;
 //border radius를 px와 %로 줄때의 차이??, %로 주면 내가 원하는대로 나오지 않음.
-border-top-left-radius:20px;
-border-top-right-radius:20px;
+border-top-left-radius:1.25rem;
+border-top-right-radius:1.25rem;
 
 
 
@@ -158,7 +165,7 @@ span {
   text-align: center;
   color: #535353;
   font-family: Roboto;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-weight: bold; 
 }
 
@@ -166,7 +173,7 @@ span {
 button {
   //text
   font-family: Roboto;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-weight: 500;
   color: #c9c9c9;
   text-align: center;
@@ -199,15 +206,82 @@ ul {
   padding-right:7%;
   height:100%;
 
+  .basicStyle {
+
+    width:21.8%;
+    height:14.07%;
+    
+    margin-right:2%;
+    margin-left:2%;
+    padding-top:2%;
+    padding-bottom:2%;
+    
+    /*
+    flex grow, shrink에 0값을 줌으로써 flex item의 크기가 변하지 않도록,
+    flex basis값을 20%로 줌으로써 flex item의 크기가 계속 유지되도록
+    */
+    flex: 0 0 27%;
+
+
+    border: solid 2px #627cec;
+    border-radius: 1.25rem;
+    text-align:center;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+      
+    background-color:#fff;
+      button {
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color:#627cec;
+      }
+    }
+
+    .clickedStyle {
+    width:21.8%;
+    height:14.07%;
+    
+    margin-right:2%;
+    margin-left:2%;
+    padding-top:2%;
+    padding-bottom:2%;
+    
+    /*
+    flex grow, shrink에 0값을 줌으로써 flex item의 크기가 변하지 않도록,
+    flex basis값을 20%로 줌으로써 flex item의 크기가 계속 유지되도록
+    */
+    flex: 0 0 27%;
+
+    border: solid 2px #627cec;
+    border-radius: 1.25rem;
+    text-align:center;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:#627cec;
+
+    button {
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color:#fff;
+    }
+  }
+
+
+
   input {
-    //todo 반응형으로
     width:27%;
-    height:38px;    
+    height:14.07%;   
     margin-right:2%;
     margin-left:2%;
 
     border: solid 2px #627cec;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     background-color: rgba(98, 124, 236, 0.18);
 
     text-align: center;
@@ -215,7 +289,7 @@ ul {
 
   input::placeholder {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 500;
     color: #627cec;
   }
@@ -238,38 +312,39 @@ prop까지는 잘 전달됨,,
 그래서 이제 각각 하나하나 씩만 스타일 바뀌도록 구현하면 됨,,
 nth child ㄱㄱ??
 */
-const NicknameBtnList = styled.li`
-//todo 반응형으로
-    width:85px;
-    height:38px;
+//! 아래 부분 불필요
+// const NicknameBtnList = styled.li`
+// //todo 반응형으로
+//     width:85px;
+//     height:38px;
     
-    margin-right:2%;
-    margin-left:2%;
-    padding-top:2%;
-    padding-bottom:2%;
+//     margin-right:2%;
+//     margin-left:2%;
+//     padding-top:2%;
+//     padding-bottom:2%;
     
-    /*
-    flex grow, shrink에 0값을 줌으로써 flex item의 크기가 변하지 않도록,
-    flex basis값을 20%로 줌으로써 flex item의 크기가 계속 유지되도록
-    */
-    flex: 0 0 27%;
+//     /*
+//     flex grow, shrink에 0값을 줌으로써 flex item의 크기가 변하지 않도록,
+//     flex basis값을 20%로 줌으로써 flex item의 크기가 계속 유지되도록
+//     */
+//     flex: 0 0 27%;
 
 
-    border: solid 2px #627cec;
-    border-radius: 20px;
-    background-color:${(props)=>(props.styleChange ? '#fff':'#627cec')};
-    text-align:center;
+//     border: solid 2px #627cec;
+//     border-radius: 20px;
+//     //background-color:${(props)=>(props.styleChange ? '#fff':'#627cec')};
+//     text-align:center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+//     display:flex;
+//     align-items:center;
+//     justify-content:center;
     
-    button {
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 500;
-    color:${(props)=> (props.styleChange ? '#627cec':'#fff')};
-    }
-`
+//     button {
+//     font-family: Roboto;
+//     font-size: 14px;
+//     font-weight: 500;
+//     color:${(props)=> (props.styleChange ? '#627cec':'#fff')};
+//     }
+// `
 
 export default NicknameModal;

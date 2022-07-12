@@ -1,4 +1,5 @@
 //점 세개 버튼 누르면 열리는 모달
+//! 반응형 완료
 
 import React, {useState} from 'react';
 
@@ -101,13 +102,13 @@ justify-content: space-evenly;
 
 //text
 font-family: Roboto;
-font-size: 14px;
+font-size: 0.875rem;
 font-weight: bold;
 //color: ${(props)=>(props.textColor ? "#535353" :"#292929")};
 color: ${(props) =>(props.textColor)};
 
 border:2px solid white;
-border-radius:20px;
+border-radius:1.25rem;
 `
 const DeleteBtn = styled.button`
 width:30%;
@@ -121,13 +122,13 @@ justify-content: space-evenly;
 
 //text
 font-family: Roboto;
-font-size: 14px;
+font-size: 0.875rem;
 font-weight: bold;
 //color: ${(props)=>(props.textColor ? "#535353" :"#292929")};
 color: ${(props) =>(props.textColor)};
 
 border:2px solid white;
-border-radius:20px;
+border-radius:1.25rem;
 
 `
 

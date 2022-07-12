@@ -1,4 +1,5 @@
 //삭제하기 버튼을 눌렀을때 보이는 모달
+//! 반응형 완료
 
 import React from 'react';
 import styled from 'styled-components';
@@ -62,7 +63,7 @@ height:25%;
 background-color:#fff;
 
 border:2px solid white;
-border-radius: 15px;
+border-radius: 0.875rem;
 `
 
 const TextBox =styled.div`
@@ -77,7 +78,7 @@ align-items: center;
 
 //text
 font-family: Roboto;
-font-size: 18px;
+font-size: 1.125rem;
 font-weight: bold;
 color: #292929;
 `
@@ -98,11 +99,11 @@ height:57%;
 
 background-color: #627cec;
 border:1px solid #627cec;
-border-radius: 31px; 
+border-radius: 1.938rem; 
 
 //text
 font-family: Roboto;
-font-size: 16px;
+font-size: 1rem;
 font-weight: 500;
 color: #fff;
 `
@@ -113,13 +114,13 @@ height:57%;
 
 background-color:#ededed;
 border:1px solid #ededed;
-border-radius: 31px; 
+border-radius: 1.938rem; 
 
 margin-right: 5%;
 
 //text
 font-family: Roboto;
-font-size: 16px;
+font-size: 1rem;
 font-weight: 500;
 color: #292929;
 `

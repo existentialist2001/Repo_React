@@ -1,4 +1,5 @@
 //*취향화면에서 편집(연필버튼) 클릭 시 렌더링되는 페이지
+//! 반응형 완료
 
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
@@ -97,7 +98,7 @@ align-items:center;
 
 //text styling
 font-family: Roboto;
-font-size: 18px;
+font-size: 1.125rem;
 font-weight: bold;
 color: #707070;
 
@@ -107,10 +108,10 @@ border:none;
 background-color:transparent;
 
 img {
-  //todo 반응형으로 바꾸어야 함
-  width:30px;
-  height:30px;
-  padding-right:5px;
+ 
+  width:1.875rem;
+  height:1.875rem;
+  padding-right:0.313rem;
 }
 
 }
@@ -120,7 +121,7 @@ const MainContainer = styled.div`
 width:100%;
 height:90%;
 padding-left: 10%;
-padding-right: 10%;
+padding-right:10%;
 
 ul {
   display:flex;
@@ -132,8 +133,8 @@ ul {
 `
 
 const ListItemContainer = styled.div`
-width:150px;
-height:160px;
+width:48%;
+height:33.3%;
 
 li {
   width:100%;
@@ -161,7 +162,7 @@ li {
 
       //text
       font-family: Roboto;
-      font-size: 15px;
+      font-size: 0.875rem;
       font-weight: bold;
       color: #fff;
       
@@ -173,13 +174,13 @@ li {
 const DirectInputBtn = styled.div`
 //text
 font-family: Roboto;
-font-size: 19px;
+font-size: 1.188rem;
 font-weight: bold;
 text-align: center;
 
-width: 154px;
-height: 66px;
-border-radius: 31px;
+width: 40%;
+height: 8.5%;
+border-radius: 1.938rem;
 box-shadow: 0 0 10px 0 rgba(111, 81, 249, 0.34);
 background-color: #fff;
 

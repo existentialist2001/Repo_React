@@ -1,4 +1,6 @@
 //*취향종류선택페이지에서 직접 입력 누를 시 렌더링되는 페이지
+//! 반응형 완료
+
 import React, { useState } from "react";
 
 import { useHistory, Link } from "react-router-dom";
@@ -22,6 +24,7 @@ const DirectTasteInput = (props) => {
           content: null,
           date: "",
           image: "",
+          tag:""
         },
       ]);
     }
@@ -92,7 +95,7 @@ align-items:center;
 
 //text styling
 font-family: Roboto;
-font-size: 18px;
+font-size: 1.125rem;
 font-weight: bold;
 color: #707070;
 
@@ -102,10 +105,9 @@ border:none;
 background-color:transparent;
 
 img {
-  //todo 반응형으로 바꾸어야 함
-  width:30px;
-  height:30px;
-  padding-right:5px;
+  width:1.875rem;
+  height:1.875rem;
+  padding-right:0.313rem;
 }
 
 }
@@ -131,7 +133,7 @@ input::placeholder{
   text-align: left;
   color: #c9c9c9;
   font-family: Roboto;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 input:focus {

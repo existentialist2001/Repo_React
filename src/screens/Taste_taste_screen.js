@@ -1,4 +1,5 @@
 //*기본화면에서 취향 클릭 시 나타나는 화면
+//! 반응형 완료
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -69,9 +70,9 @@ a {
   //연필버튼 고정
   position:fixed;
   
-  //todo 반응형으로
-  right:10px;
-  bottom:10px;
+
+  right:2.5%;
+  bottom:1.18%;
  
 }
 `
@@ -118,14 +119,14 @@ flex-direction:column;
 justify-content:center;
 
 span:nth-child(1) {
-  font-size:15px;
+  font-size:0.938rem;
   font-weight: bold;
   color: #292929;
   font-family: Roboto;
 }
 
 span:nth-child(2) {
-  font-size:15px;
+  font-size:0.938rem;
   font-weight: normal;
   color: #939393;
   font-family: Roboto;

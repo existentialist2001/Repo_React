@@ -1,4 +1,5 @@
 //*특정 취향에 대한 구체적인 내용을 입력하는 페이지(컨테이너)
+//! 반응형 완료
 
 import React, { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
@@ -10,6 +11,10 @@ import styled from "styled-components";
 const InputTasteContent = (props) => {
   const history = useHistory();
   let match = useRouteMatch();
+
+//조건부 스타일링
+const [textColor, setTextColor]=useState("#939393");
+const [tagTextColor, setTagTextColor]=useState("#939393");
 
   //사용자가 선택하거나 입력한 취향 이름을 useRouteMatch hook을 통해 가져와서 변수에 저장
   let taste_name = match.params.taste_name;
@@ -24,16 +29,37 @@ const InputTasteContent = (props) => {
 
   //입력
   const [inputedContent, setInputedContent] = useState("");
+  const [inputedDate, setInputedDate] =useState("");
+  const [inputedTag, setInputedTag] =useState("");
+
   const onChange = (event) => {
     const value = event.target.value;
     setInputedContent(value);
   };
 
+  const dateOnChange = (event) => {
+    const value = event.target.value;
+    setInputedDate(value);
+  }
+
+  const tagOnChange = (event) => {
+    const value = event.target.value;
+    setInputedTag(value);
+  }
+
   //저장
+  //! 주소 이동말고는 백엔드에서 해야할 작업
   const onComplete = () => {
     //취향관한 입력된 내용을 기존 배열에 추가
     let tasteList = props.tastes;
+    //내용추가
     tasteList[foundIndex].content = inputedContent;
+    //날짜추가
+    tasteList[foundIndex].date =inputedDate;
+    //태그추가
+    tasteList[foundIndex].tag =inputedTag;
+
+    //기존 배열 업데이트
     props.setTastes(tasteList);
 
     // /taste 주소로 이동시켜주기
@@ -46,10 +72,17 @@ const InputTasteContent = (props) => {
   return (
     <ScreenContainer>
       <HeaderContainer>
-      <HeaderContentBox><span><button onClick={() => goBack()}><img src={require("../images/back_black.png")}/></button> {props.tastes[foundIndex].name}</span><SaveBtnBox><button onClick={onComplete}>저장</button></SaveBtnBox></HeaderContentBox>
+        <HeaderContentBox><span class="backbtn"><button onClick={() => goBack()}><img src={require("../images/back_black.png")}/></button> {props.tastes[foundIndex].name}</span><SaveBtnBox><button onClick={onComplete}>저장</button></SaveBtnBox></HeaderContentBox>
       </HeaderContainer>
-    <MainContainer><MainBox_1>이소망님의<br/>{props.tastes[foundIndex].name} 취향은 어떤가요?</MainBox_1><MainBox_2><input type="text" value={inputedContent} onChange={onChange} placeholder="내용을 입력해주세요" /></MainBox_2><MainBox_3></MainBox_3></MainContainer>
-      </ScreenContainer>
+    <MainContainer>
+      <MainBox_1>이소망님의<br/>{props.tastes[foundIndex].name} 취향은 어떤가요?</MainBox_1>
+      <MainBox_2><input type="text" value={inputedContent} onChange={onChange} placeholder="내용을 입력해주세요" /></MainBox_2>
+      <MainBox_3>
+        <DateContainer textColor={textColor}>일시<input type="text" onChange={dateOnChange} onFocus={()=>(setTextColor("#627cec"))} onBlur={()=>(setTextColor("#939393"))} /></DateContainer>
+        <TagContainer textColor={tagTextColor}>태그<input type="text" onChange={tagOnChange} onFocus={()=>(setTagTextColor("#627cec"))} onBlur={()=>(setTagTextColor("#939393"))} placeholder="직접입력"/></TagContainer>
+      </MainBox_3>
+    </MainContainer>
+  </ScreenContainer>
   );
 };
 /* 
@@ -87,7 +120,7 @@ justify-content: center;
 `
 const HeaderContentBox = styled.div`
 height: 100%;
-width: 80%;
+width: 90%;
 
 display:flex;
 align-items:center;
@@ -95,17 +128,18 @@ justify-content: space-between;
 
 //text styling
 font-family: Roboto;
-font-size: 18px;
+font-size: 1.125rem;
 font-weight: bold;
 color: #707070;
 
-button {
-img {
-  //todo 반응형으로 바꾸어야 함
-  width:30px;
-  height:30px;
-  padding-right:5px;
-}
+.backbtn {
+  button {
+    img {
+      width:1.875rem;
+      height:1.875rem;
+      padding-right:0.313rem;
+    }
+  }
 }
 
 span {
@@ -118,7 +152,7 @@ const SaveBtnBox =styled.div`
 button{
   //text styling
   font-family: Roboto;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   color: #627cec;
 }
@@ -141,7 +175,7 @@ border-bottom:solid 0.5px #627cec;
 
 //text styling
 font-family: Montserrat;
-font-size: 24px;
+font-size: 1.5rem;
 font-weight: bold;
 color: #292929;
 `
@@ -157,7 +191,7 @@ input {
 
 input::placeholder{
   font-family: Roboto;
-  font-size: 15px;
+  font-size: 0.875rem;
   color: #939393;
 }
 `
@@ -165,6 +199,83 @@ input::placeholder{
 const MainBox_3=styled.div`
 width:100%;
 height:40%;
+padding-left: 5%;
+padding-right: 5%;
+
+`
+
+const DateContainer=styled.div`
+width:100%;
+height:15%;
+
+display:flex;
+justify-content: space-between;
+align-items: center;
+
+//text
+font-size: 1rem;
+font-family: Roboto;
+//{props.textColor} 이렇게 바로 작성하는 것이 아니라 아래와 같이 작성
+color: ${(props)=>(props.textColor)};
+font-weight: bold;
+
+input {
+  width: 80%;
+  height: 100%;
+  border: solid 2px #c9c9c9;
+  border-radius: 0.313rem;
+
+  padding-left: 3%;
+}
+input:focus {
+    outline: none ;
+    border-color: #627cec;
+}
+`
+
+const TagContainer=styled.div`
+width:100%;
+height:15%;
+margin-top: 5%;
+display:flex;
+justify-content: flex-start;
+align-items: center;
+
+//text
+font-size: 1rem;
+font-family: Roboto;
+color: ${(props)=>(props.textColor)};
+font-weight: bold;
+
+input {
+  width: 20%;
+  height: 77.7%;
+  background-color: #c9c9c9;
+  border: solid 1px #c9c9c9;
+  border-radius: 1.25rem;
+
+  text-align: center;
+  
+  margin-left:10%;
+
+  ::placeholder {
+    color: #fff;
+    font-weight: 500;
+    font-family: Roboto;
+    font-size: 0.813rem;
+  }
+}
+
+input:focus {
+    outline: none ;
+    border-color: #627cec;
+    background-color: rgba(98, 124, 236, 0.18);
+
+    ::placeholder {
+      color: #627cec;
+    }
+}
+
 `
 
 export default InputTasteContent;
